@@ -1,0 +1,24 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Register</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-item>
+    <ion-input [(ngModel)]="nombre" placeholder="Nombre"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-input [(ngModel)]="apellido" placeholder="Apellido"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-input [(ngModel)]="rut" placeholder="Rut"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-input [(ngModel)]="institucion" placeholder="Institución"></ion-input>
+  </ion-item>
+
+  <!-- Agrega el botón para guardar los datos -->
+  <ion-button expand="full" (click)="registrar()">Guardar</ion-button>
+</ion-content>
