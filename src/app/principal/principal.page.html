@@ -1,0 +1,169 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>principal</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">principal</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+    <ion-segment (ionChange)="segmentChanged($event)" value="default" [(ngModel)]="selectedTab">
+      <ion-segment-button value="misDatos">
+        <ion-label>Mis Datos</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="expLabo">
+        <ion-label>Experiencia Laboral</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="certi">
+        <ion-label>Certificados</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+
+    <div id="contenedor" *ngIf="selectedTab == 'misDatos'">
+      <ion-item lines="full">
+        <ion-label>Bienvenido {{nombre_usuario}}</ion-label>
+      </ion-item>
+      <ion-card>
+        <ion-card-content>
+          <ion-input [(ngModel)]="nombre">Nombre:</ion-input>
+        </ion-card-content>
+      </ion-card>
+      <ion-card>
+        <ion-card-content>
+          <ion-input [(ngModel)]="apellido">Apellido:</ion-input>
+        </ion-card-content>
+      </ion-card>
+      <ion-item lines="full">
+        {{'Nivel Educacional'}}
+        <ion-select [(ngModel)]="campoSeleccionado">
+          <ion-select-option disabled value="0">Seleccione nivel</ion-select-option>
+          <ion-select-option value="1">Basico</ion-select-option>
+          <ion-select-option value="2">Media</ion-select-option>
+          <ion-select-option value="3">Superior</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-label>Fecha de nacimiento:</ion-label>
+          <ion-card>
+            <ion-card-content>
+              <ion-datetime-button  datetime="datetime"></ion-datetime-button>
+              <ion-modal [keepContentsMounted]="true">
+                <ng-template>
+                  <ion-datetime id="datetime"></ion-datetime>
+                </ng-template>
+              </ion-modal>
+            </ion-card-content>
+          </ion-card>
+      </ion-item>
+      <ion-button (click)="limpiar()">Limpiar</ion-button>
+      <ion-button color="danger" (click)="mostrar()">Mostrar</ion-button>
+    </div>
+
+    
+
+    <div id="container2" *ngIf="selectedTab == 'expLabo'">
+      <ion-item lines="full">
+        <ion-card>
+          <ion-card-content>
+            <ion-input [(ngModel)]="empresa">Empresa:</ion-input>
+          </ion-card-content>
+        </ion-card>
+      </ion-item>
+      <ion-item>
+        <label for="">Fecha de contratación</label>
+        <ion-card>
+          <ion-card-content>
+            <ion-datetime-button id="1" [(ngModel)]="inicio"  datetime="datetime"></ion-datetime-button>
+            <ion-modal [keepContentsMounted]="true">
+              <ng-template>
+                <ion-datetime id="datetime"></ion-datetime>
+              </ng-template>
+            </ion-modal>
+          </ion-card-content>
+        </ion-card>
+      </ion-item>
+      <ion-item>
+        <ion-label>¿Trabajas actualmente aquí?</ion-label>
+        <ion-card>
+          <ion-card-content>
+            <ion-select aria-label="¿Trabajas actualmente aquí?" (ionChange)="exEmpleado()" [(ngModel)]="trabajaSi">
+              <ion-select-option value="1">Si</ion-select-option>
+              <ion-select-option value="2">No</ion-select-option>
+            </ion-select>
+          </ion-card-content>
+        </ion-card>
+      </ion-item>
+      <ion-item [style.display]="isVisible ? 'block' : 'none'">
+        <label for="">Fecha de termino contrato</label>
+        <ion-card>
+          <ion-card-content>
+            <ion-datetime-button id="2" [(ngModel)]="termino" datetime="datetime"></ion-datetime-button>
+            <ion-modal [keepContentsMounted]="true">
+              <ng-template>
+                <ion-datetime id="datetime2"></ion-datetime>
+              </ng-template>
+            </ion-modal>
+          </ion-card-content>
+        </ion-card>
+      </ion-item>
+      <ion-item>
+        <ion-card>
+          <ion-card-content>
+            <ion-input [(ngModel)]="cargo">Cargo:</ion-input>
+          </ion-card-content>
+        </ion-card>
+      </ion-item>
+      <ion-button (click)="terminar()" expand="block" color="danger">Terminar</ion-button>
+    </div>
+
+    <div id="container3" *ngIf="selectedTab == 'certi'">
+      <ion-item>
+        <ion-card>
+          <ion-card-content>
+            <ion-input>Nombre Formulario:</ion-input>
+          </ion-card-content>
+        </ion-card>
+      </ion-item>
+      <ion-item>
+        <ion-card>
+          <ion-card-content>
+            <ion-datetime-button datetime="datetime"></ion-datetime-button>
+            <ion-modal [keepContentsMounted]="true">
+              <ng-template>
+                <ion-datetime id="datetime"></ion-datetime>
+              </ng-template>
+            </ion-modal>
+          </ion-card-content>
+        </ion-card>
+      </ion-item>
+      <ion-item>
+        <ion-label>¿El formulario vence?</ion-label>
+        <ion-card>
+          <ion-card-content>
+            <ion-select [(ngModel)]="venceSi">
+              <ion-select-option value="1">Si</ion-select-option>
+              <ion-select-option value="2">No</ion-select-option>
+            </ion-select>
+          </ion-card-content>
+        </ion-card>
+      </ion-item>
+      <ion-item>
+        <ion-card>
+          <ion-card-content>
+            <ion-datetime-button datetime="datetime"></ion-datetime-button>
+            <ion-modal [keepContentsMounted]="true">
+              <ng-template>
+                <ion-datetime id="datetime"></ion-datetime>
+              </ng-template>
+            </ion-modal>
+          </ion-card-content>
+        </ion-card>
+      </ion-item>
+    </div>
+  </ion-content>
+</ion-content>
