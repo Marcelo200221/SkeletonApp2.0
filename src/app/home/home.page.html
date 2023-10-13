@@ -6,8 +6,12 @@
       <ion-title size="large">Blank</ion-title>
     </ion-toolbar>
   </ion-header>
+  <ion-content>
+    <app-info></app-info>
+  </ion-content>
 
   <div id="container">
+    
     <ion-button expand="block" [routerLink]="['/login']">Sign in</ion-button>
     
     <ion-button color="danger" expand="block" [routerLink]="['/register']" >Sign up</ion-button>
