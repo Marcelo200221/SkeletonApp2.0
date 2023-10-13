@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
-
+import { RegionesComponent } from '../componentes/regiones/regiones.component';
 import { PrincipalPageRoutingModule } from './principal-routing.module';
 
 import { PrincipalPage } from './principal.page';
@@ -15,6 +15,6 @@ import { PrincipalPage } from './principal.page';
     IonicModule,
     PrincipalPageRoutingModule
   ],
-  declarations: [PrincipalPage]
+  declarations: [PrincipalPage, RegionesComponent]
 })
 export class PrincipalPageModule {}

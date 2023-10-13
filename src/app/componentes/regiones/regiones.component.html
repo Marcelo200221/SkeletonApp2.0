@@ -1,0 +1,7 @@
+
+<ion-content>
+  <ion-label>Region</ion-label>
+  <ion-select (ngModelChange)="seleccionarRegion()" [(ngModel)]="regionSeleccionada">
+    <ion-select-option *ngFor="let region of regiones" [value]="region.nombre">{{region.nombre}}</ion-select-option>
+  </ion-select>
+</ion-content>

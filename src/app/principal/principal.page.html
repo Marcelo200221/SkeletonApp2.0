@@ -60,6 +60,14 @@
             </ion-card-content>
           </ion-card>
       </ion-item>
+      <ion-item>
+        <ion-label>Región</ion-label>
+        <ion-card>
+          <ion-card-content>
+            <app-regiones (ionChange)="segmentChanged($event)"></app-regiones>
+          </ion-card-content>
+        </ion-card>
+      </ion-item>
       <ion-button (click)="limpiar()">Limpiar</ion-button>
       <ion-button color="danger" (click)="mostrar()">Mostrar</ion-button>
     </div>

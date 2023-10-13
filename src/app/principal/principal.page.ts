@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { Storage } from '@ionic/storage-angular'
+import { RegionesSeleccionadasService } from '../servicios/regiones-seleccionadas.service';
 
 @Component({
   selector: 'app-principal',
@@ -24,19 +25,33 @@ export class PrincipalPage implements OnInit {
 
   venceSi: string="";
 
-  constructor(private storage: Storage,private route: ActivatedRoute, private alertController: AlertController) { 
+  regionSelect: string="";
+
+  regionSeleccionada: string = '';
+
+  constructor(private regionesSeleccionadasService: RegionesSeleccionadasService ,private storage: Storage,private route: ActivatedRoute, private alertController: AlertController) { 
     this.route.queryParams.subscribe(params => {
       this.nombre_usuario = params['username']
     })
+
+    this.regionSeleccionada = this.regionesSeleccionadasService.getRegionSeleccionada();
   }
   segmentChanged(event: any) {
     // Detecta cuándo cambia el segmento y actualiza el valor de activeSegment
     this.selectedTab = event.detail.value;
   }
 
+  onRegionSeleccionadaChange(region: string){
+    this.regionSelect = region;
+    console.log(this.regionSelect);
+    
+  }
+
   ngOnInit() {
     this.storage.create();
     this.isVisible = false;
+    console.log(this.regionSeleccionada);
+    
   }
   ionViewDidEnter() {
     this.isVisible = false;
@@ -50,6 +65,8 @@ export class PrincipalPage implements OnInit {
   }
 
   async mostrar(){
+    this.onRegionSeleccionadaChange(this.regionSeleccionada);
+    
     if(this.campoSeleccionado == "1"){
       this.campoSeleccionado = "Basico";
     }else if(this.campoSeleccionado == "2"){
@@ -73,6 +90,7 @@ export class PrincipalPage implements OnInit {
       })
       await alert.present();
     }
+    
   }
 
   async terminar(){
