@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AlertController } from '@ionic/angular';
-import { Storage } from '@ionic/storage-angular'
+import { StorageService } from '../servicios/storage.service'; 
 import { RegionesSeleccionadasService } from '../servicios/regiones-seleccionadas.service';
 
 @Component({
@@ -25,11 +25,13 @@ export class PrincipalPage implements OnInit {
 
   venceSi: string="";
 
+  nombreStorage: string="";
+
   regionSelect: string="";
 
   regionSeleccionada: string = '';
 
-  constructor(private regionesSeleccionadasService: RegionesSeleccionadasService ,private storage: Storage,private route: ActivatedRoute, private alertController: AlertController) { 
+  constructor(private regionesSeleccionadasService: RegionesSeleccionadasService ,private storage: StorageService,private route: ActivatedRoute, private alertController: AlertController) { 
     this.route.queryParams.subscribe(params => {
       this.nombre_usuario = params['username']
     })
@@ -48,12 +50,16 @@ export class PrincipalPage implements OnInit {
   }
 
   ngOnInit() {
-    this.storage.create();
+    
+    
+    
+    
     this.isVisible = false;
     console.log(this.regionSeleccionada);
     
   }
   ionViewDidEnter() {
+    this.storage.getValue("Usuario")
     this.isVisible = false;
   }
 
@@ -97,7 +103,6 @@ export class PrincipalPage implements OnInit {
     if(this.empresa != '' && this.trabajaSi != '' && this.cargo != ''){
       const empleado = {empresa: this.empresa, trabajaActualmente: this.trabajaSi, cargo: this.cargo}
 
-      this.storage.set("Experiencia laboral", empleado);
       
     }
     if(this.trabajaSi == "1"){

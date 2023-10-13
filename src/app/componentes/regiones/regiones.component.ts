@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { DatosRegionalesService } from 'src/app/servicios/datos-regionales.service';
 import { RegionesSeleccionadasService } from 'src/app/servicios/regiones-seleccionadas.service'; 
+import { StorageService } from 'src/app/servicios/storage.service';
 
 @Component({
   selector: 'app-regiones',
@@ -15,11 +16,12 @@ export class RegionesComponent  implements OnInit {
 
   @Output() regionSeleccionadaChanged = new EventEmitter<string>();
 
-  constructor(private regionesSeleccionadasService: RegionesSeleccionadasService ,private datosRegionalesService: DatosRegionalesService) { }
+  constructor(private storage: StorageService,private regionesSeleccionadasService: RegionesSeleccionadasService ,private datosRegionalesService: DatosRegionalesService) { }
 
-  seleccionarRegion() {
+  seleccionarRegion(event: any) {
     const regionSeleccionada = this.regionSeleccionada;
-    this.regionesSeleccionadasService.setRegionSeleccionada(regionSeleccionada);
+    const regionGuardar = {region: regionSeleccionada};
+    this.storage.pushValue('Usuario', regionGuardar);
     console.log(regionSeleccionada);
     
   }
@@ -42,8 +44,5 @@ export class RegionesComponent  implements OnInit {
     );
   }
 
-  public mostrarRegion(){
-    this.regionSeleccionadaChanged.emit(this.regionSeleccionada);
-  }
 
 }
