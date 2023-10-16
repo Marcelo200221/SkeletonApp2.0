@@ -10,7 +10,9 @@ export class InfoComponent  implements OnInit {
 
   infor: any;
 
-  constructor() { }
+  constructor() {
+    this.infor = { batteryLevel: 0, isCharging: false };
+   }
 
   async logDeviceInfo(){
     const info = await Device.getInfo();
